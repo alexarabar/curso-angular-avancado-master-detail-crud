@@ -13,7 +13,8 @@ export class CategoryService {
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<Category[]> {
-    return this.http.get('this.apiPath').pipe(
+    const url = `${this.apiPath}`;
+    return this.http.get(url).pipe(
       catchError(this.handleError),
       map(this.jsonDataToCategories)
     )
@@ -42,7 +43,7 @@ export class CategoryService {
     )
   }
   
-  private delete(id: number): Observable<any> {
+  public delete(id: number): Observable<any> {
     const url = `${this.apiPath}/${id}`;
     return this.http.delete(url).pipe(
       catchError(this.handleError),
